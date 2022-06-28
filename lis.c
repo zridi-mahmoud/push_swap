@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 17:32:59 by mzridi            #+#    #+#             */
-/*   Updated: 2022/06/19 18:01:31 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/06/26 19:05:21 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,42 +15,45 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int	_lis(int arr[], int n, int *max_ref)
+// the longest increasing subsequence 
+
+void	lis(int *arr, int size, int *dp)
 {
-	int	res;
-	int	max_ending_here;
 	int	i;
-
-	if (n == 1)
-		return (1);
-	max_ending_here = 1;
-	i = 1;
-	while (i < n)
-	{
-		res = _lis(arr, i, max_ref);
-		if (arr[i - 1] < arr[n - 1]
-			&& res + 1 > max_ending_here)
-			max_ending_here = res + 1;
-		i++;
-	}
-	if (*max_ref < max_ending_here)
-		*max_ref = max_ending_here;
-	return (max_ending_here);
-}
-
-int	lis(int arr[], int n)
-{
+	int	j;
 	int	max;
+	int	tmp;
 
+	dp[size - 1] = 1;
 	max = 1;
-	_lis(arr, n, &max);
-	return (max);
+	i = size - 1;
+	while (--i >= 0)
+	{
+		dp[i] = 1;
+		j = size - 1;
+		while (i < j)
+		{
+			if (arr[i] < arr[j])
+			{
+				tmp = dp[j] + 1;
+				if (tmp > dp[i])
+					dp[i] = tmp;
+			}
+			j -= 1;
+		}
+		if (dp[i] > max)
+			max = dp[i];
+	}
 }
 
-int main()
+int	main(void)
 {
-	int arr[] = { 10, 22, 9, 33, 21, 50, 41, 60 };
-	int n = sizeof(arr) / sizeof(arr[0]);
-	printf("Length of lis is %d", lis(arr, n));
-	return 0;
+	int arr[] = {3, 4, -1, 0, 6, 2, 3, -2, 9, 10};
+	int size = 10;
+	int *dp = (int *)malloc(sizeof(int) * size);
+	lis(arr, size, dp);
+
+	for (int i = 0; i < size; i++)
+		printf("%d ", dp[i]);
+	printf("\n");
 }
