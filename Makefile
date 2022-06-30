@@ -6,7 +6,7 @@
 #    By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:28:33 by mzridi            #+#    #+#              #
-#    Updated: 2022/06/19 15:00:24 by mzridi           ###   ########.fr        #
+#    Updated: 2022/06/30 22:40:39 by mzridi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ NAME = push_swap
 
 CC = gcc
 
-SRC = push_swap.c ft_split.c ft_join.c ft_atoi.c
-BONUS_SRC = push_swap_bonus.c ft_split.c ft_join.c
+SRC = push_swap.c ft_split.c ft_join.c ft_atoi.c ft_lis.c
+BONUS_SRC = push_swap_bonus.c ft_split.c ft_join.c ft_lis.c
 
 OBJ = $(SRC:.c=.o) 
 
@@ -31,7 +31,7 @@ $(NAME): $(OBJ)
 	$(CC) $(OBJ) -o $(NAME)
 	
 	
-%.o: %.c
+%.o: %.c push_swap.h
 	$(CC) -Wall -Wextra -Werror -c $< -o $@
 
 clean:
@@ -44,4 +44,3 @@ fclean : clean
 	@rm -rf $(NAME) push_swap push_swap_bonus
 
 re : fclean all
-
