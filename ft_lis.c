@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lis.c                                              :+:      :+:    :+:   */
+/*   ft_lis.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 17:32:59 by mzridi            #+#    #+#             */
-/*   Updated: 2022/06/30 21:15:52 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/07/04 21:24:20 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,26 @@ int	lis_size(int *arr, int size, int *dp)
 	return (max);
 }
 
-int	*lis(int *arr, int size, int *dp)
+int	*lis(t_stacks *stacks, int *dp)
 {
 	int	i;
 	int	j;
 	int	*seq;
-	int	seq_size;
+	int	size_seq;
 
-	seq_size = lis_size(arr, size, dp);
-	seq = (int *)malloc(sizeof(int) * seq_size);
+	size_seq = lis_size(stacks->a, stacks->size_a, dp);
+	stacks->size_seq = size_seq;
+	seq = (int *)malloc(sizeof(int) * size_seq);
 	if (!seq)
 		return (NULL);
 	i = 0;
 	j = 0;
-	while (seq_size > 0)
+	while (size_seq > 0)
 	{
-		if (dp[i] == seq_size)
+		if (dp[i] == size_seq)
 		{
-			seq[j] = arr[i];
-			seq_size -= 1;
+			seq[j] = stacks->a[i];
+			size_seq -= 1;
 			j++;
 		}
 		i++;

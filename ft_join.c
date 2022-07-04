@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parcer.c                                           :+:      :+:    :+:   */
+/*   ft_join.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 13:35:34 by mzridi            #+#    #+#             */
-/*   Updated: 2022/06/19 14:24:07 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/07/03 11:42:08 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,17 @@ char	*join_args(char **args)
 	char	*result;
 	int		i;
 
-	result = malloc(sizeof(char));
+	result = (char *)malloc(sizeof(char) * 1);
 	if (!result)
 		return (NULL);
+	result[0] = 0;
 	i = 1;
 	while (args[i])
 	{
 		tmp = result;
 		tmp2 = ft_strjoin(result, " ");
+		if (!tmp2)
+			return (NULL);
 		result = ft_strjoin(tmp2, args[i]);
 		free(tmp);
 		free(tmp2);

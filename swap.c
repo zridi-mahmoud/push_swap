@@ -6,48 +6,59 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 16:39:40 by mzridi            #+#    #+#             */
-/*   Updated: 2022/06/26 17:55:17 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/07/02 22:47:53 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	sa(int **arr, int size)
+#include "push_swap.h"
+
+void	sa(t_stacks *stacks, int type, int print)
 {
 	int	tmp;
 
-	tmp = arr[size - 1];
-	*arr[size - 1] = arr[size - 2];
-	*arr[size - 2] = tmp;
-}
-
-void	ss(int *a, int *b, int size)
-{
-	sa(a, size);
-	sa(b, size);
-}
-
-void	pa(int **a, int *size_a, int **b, int *size_b)
-{
-	int	tmp;
-
-	*a[*size_a - 1] = *b[*size_b - 1];
-	*size_a += 1;
-	*size_b -= 1;
-}
-
-void	pb(int **a, int *size_a, int **b, int *size_b)
-{
-	pa(b, size_b, a, size_a);
-}
-
-void	ra(int **arr, int size)
-{
-	int	tmp;
-
-	tmp = *arr[size - 1];
-	while (size > 1)
+	if (type)
 	{
-		*arr[size - 1] = *arr[size - 2];
-		size -= 1;
+		if (print)
+			printf("sa\n");
+		tmp = stacks->a[0];
+		stacks->a[0] = stacks->a[1];
+		stacks->a[1] = tmp;
 	}
-	*arr[0] = tmp;
+	else
+	{
+		if (print)
+			printf("sb\n");
+		tmp = stacks->b[0];
+		stacks->b[0] = stacks->b[1];
+		stacks->b[1] = tmp;
+	}
+}
+
+void	ss(t_stacks *stacks)
+{
+	printf("ss\n");
+	sa(stacks, 1, 0);
+	sa(stacks, 0, 0);
+}
+
+void	pa(t_stacks *stacks, int type)
+{
+	int	tmp;
+
+	if (type)
+	{
+		printf("pa\n");
+		tmp = stacks->b[stacks->size_b - 1];
+		stacks->size_b -= 1;
+		stacks->a[stacks->size_a] = tmp;
+		stacks->size_a += 1;
+	}
+	else
+	{
+		printf("pb\n");
+		tmp = stacks->a[stacks->size_a - 1];
+		stacks->size_a -= 1;
+		stacks->b[stacks->size_b] = tmp;
+		stacks->size_b += 1;
+	}
 }

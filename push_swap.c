@@ -6,13 +6,23 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:23:46 by mzridi            #+#    #+#             */
-/*   Updated: 2022/06/30 22:46:32 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/07/04 21:34:40 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 int	ft_tab_len(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
+}
+
+int	tab_int_len(int *tab)
 {
 	int	i;
 
@@ -43,16 +53,15 @@ int	*ft_str_to_int(char **str_tab)
 
 void	push_swap(t_stacks *stacks)
 {
-	int			*dp;
-	int			*seq;
-	int			i;
+	int	min_cost;
+	int	index;
+	int	i;
 
-	dp = NULL;
-	seq = (int *)malloc(sizeof(int) * stacks->size_a);
-	seq = lis(stacks->a, stacks->size_a, dp);
-	for (i = 0; i < 6; i++)
-		printf("%d ", seq[i]);
-	printf("\n");
+	push_lis(stacks);
+	while (stacks->size_a > 0)
+	{
+		
+	}
 }
 
 int	main(int argc, char **argv)
@@ -61,22 +70,24 @@ int	main(int argc, char **argv)
 	int			*int_tab;
 	char		*str;
 	t_stacks	*stacks;
-	int			i;
 
+	stacks = (t_stacks *)malloc(sizeof(t_stacks));
 	if (argc == 1)
 		return (0);
 	str = join_args(argv);
+	if (!str)
+		return (0);
 	str_tab = ft_split(str, ' ');
 	int_tab = ft_str_to_int(str_tab);
 	free(str);
-	free(str_tab);
-	stacks = (t_stacks *)malloc(sizeof(t_stacks));
-	stacks->a = int_tab;
-	stacks->b = NULL;
-	stacks->size_a = ft_tab_len(str_tab);
-	// push_swap(stacks);
-	for (i = 0; i < stacks->size_a; i++)
-		printf("%d ", int_tab[i]);
-	printf("\n");
+	if (!init_stacks(stacks, ft_tab_len(str_tab), int_tab))
+		return (0);
+	push_swap(stacks);
+	while (stacks->size_a--)
+		free(str_tab[stacks->size_a]);
+	free(stacks->a);
+	free(stacks->b);
+	free(stacks->sorted_a);
+	free(stacks);
 	return (0);
 }
