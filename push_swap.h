@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:20:15 by mzridi            #+#    #+#             */
-/*   Updated: 2022/07/04 21:58:26 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/12 15:56:40 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ typedef struct s_stacks
 	int	size_seq;
 	int	*sorted_a;
 	int	*min_operations;
-	int	index_min_operation;
+	int	target_a;
+	int	target_b;
 }				t_stacks;
 
 char	**ft_split(char const *s, char c);
@@ -42,5 +43,12 @@ void	rr(t_stacks *stacks);
 void	rra(t_stacks *stacks, int type, int print);
 void	rrr(t_stacks *stacks);
 int		init_stacks(t_stacks *stacks, int size, int *int_tab);
+void	get_min_operation(t_stacks *stacks);
+void	r_up_up(t_stacks *stacks);
+void	r_down_down(t_stacks *stacks);
+void	r_up_down(t_stacks *stacks);
+void	r_down_up(t_stacks *stacks);
+int		push_it_to_a(t_stacks *stacks);
+void	push_lis(t_stacks *stacks);
 
 #endif
