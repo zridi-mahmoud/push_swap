@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:20:15 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/14 15:31:37 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/14 22:41:50 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_stacks
 	char	*error_message;
 	long	max_b;
 	long	min_b;
+	char	*operations;
 }				t_stacks;
 
 char	**ft_split(char const *s, char c);
@@ -54,5 +55,6 @@ void	r_up_down(t_stacks *stacks);
 void	r_down_up(t_stacks *stacks);
 int		push_it_to_b(t_stacks *stacks);
 void	push_lis(t_stacks *stacks);
+char	*ft_strjoin(char const *s1, char const *s2);
 
 #endif

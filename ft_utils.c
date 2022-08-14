@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 12:11:03 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/14 15:38:56 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/14 22:33:02 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,15 @@ int	init_stacks(t_stacks *stacks, int size, int *int_tab)
 		free(stacks->min_operations);
 		return (0);
 	}
+	stacks->operations = (char *)malloc(sizeof(char) * 1);
+	if (!stacks->operations)
+	{
+		free(stacks->b);
+		free(stacks->min_operations);
+		free(stacks->sorted_a);
+		return (0);
+	}
+	stacks->operations[0] = 0;
 	stacks->size_a = size;
 	stacks->size_b = 0;
 	i = -1;
@@ -97,5 +106,5 @@ void	push_lis(t_stacks *stacks)
 	}
 	free(seq);
 	free(dp);
-	printf("%d %d\n", stacks->size_a, stacks->size_b);
+	// printf("%d %d\n", stacks->size_a, stacks->size_b);
 }

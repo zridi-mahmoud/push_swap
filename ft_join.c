@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 13:35:34 by mzridi            #+#    #+#             */
-/*   Updated: 2022/07/03 11:42:08 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/14 22:26:56 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,10 @@ char	*join_args(char **args)
 		tmp = result;
 		tmp2 = ft_strjoin(result, " ");
 		if (!tmp2)
+		{
+			free(tmp);
 			return (NULL);
+		}
 		result = ft_strjoin(tmp2, args[i]);
 		free(tmp);
 		free(tmp2);

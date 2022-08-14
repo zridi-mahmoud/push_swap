@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 22:36:19 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/14 22:10:23 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/14 22:16:04 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	push_it_to_b(t_stacks *stacks)
 	int	type;
 
 	type = up_or_down(stacks->target_a, stacks->target_b, stacks, 1);
-	printf("type :%d \n", type);
+	// printf("type :%d \n", type);
 	if (type == 1)
 		r_up_up(stacks);
 	else if (type == 2)
