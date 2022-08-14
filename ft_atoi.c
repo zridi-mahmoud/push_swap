@@ -6,11 +6,11 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:49:46 by mzridi            #+#    #+#             */
-/*   Updated: 2022/06/19 14:49:50 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/14 15:43:58 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	get_pos(char *str)
+long	get_pos(char *str)
 {
 	int		i;
 	long	result;
@@ -26,7 +26,7 @@ static int	get_pos(char *str)
 	return (result);
 }
 
-int	ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
 	int		i;
 	long	result;

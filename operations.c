@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 22:36:19 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/12 16:13:06 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/14 22:10:23 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	set_min_operations(t_stacks *stacks, int *min_op, int i, int j)
 	stacks->target_b = j;
 }
 
-// TODO: check loop stop condition
 void	get_min_operation(t_stacks *stacks)
 {
 	int	i;
@@ -68,16 +67,22 @@ void	get_min_operation(t_stacks *stacks)
 	int	*min_op;
 
 	i = 0;
-	min_op = NULL;
-	while (i <= stacks->size_a)
+	min_op = malloc(sizeof(int));
+	if (!min_op)
+		printf("Error while allocating variable");
+	*min_op = 1000000;
+	while (i < stacks->size_a)
 	{
 		j = 0;
-		while (j <= stacks->size_b)
+		while (j < stacks->size_b)
 		{
 			jj = j + 1;
 			if (jj == stacks->size_b)
 				jj = 0;
-			if (stacks->a[i] > stacks->b[j] && stacks->a[i] < stacks->b[jj])
+			if ((stacks->a[i] < stacks->b[j] && stacks->a[i] > stacks->b[jj] && stacks->b[jj] < stacks->b[j]) \
+			|| (stacks->a[i] > stacks->b[j] && stacks->a[i] < stacks->b[jj] && stacks->b[jj] > stacks->b[jj]) \
+			|| (stacks->a[i] > stacks->max_b && stacks->b[jj] == stacks->max_b) \
+			|| (stacks->a[i] < stacks->min_b && stacks->b[jj] == stacks->min_b))
 			{
 				stacks->min_operations[i] = up_or_down(i, j, stacks, 0);
 				if (i == 0 || *min_op > stacks->min_operations[i])
@@ -90,11 +95,12 @@ void	get_min_operation(t_stacks *stacks)
 	}
 }
 
-int	push_it_to_a(t_stacks *stacks)
+int	push_it_to_b(t_stacks *stacks)
 {
 	int	type;
 
 	type = up_or_down(stacks->target_a, stacks->target_b, stacks, 1);
+	printf("type :%d \n", type);
 	if (type == 1)
 		r_up_up(stacks);
 	else if (type == 2)
@@ -108,6 +114,6 @@ int	push_it_to_a(t_stacks *stacks)
 		printf("something is wrong");
 		return (0);
 	}
-	pa(stacks, 1);
+	pa(stacks, 0);
 	return (1);
 }

@@ -6,34 +6,39 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 12:11:03 by mzridi            #+#    #+#             */
-/*   Updated: 2022/07/04 22:36:14 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/14 15:38:56 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+void	swap_i_j(t_stacks *stacks, int i, int j)
+{
+	int	tmp;
+
+	tmp = stacks->sorted_a[i];
+	stacks->sorted_a[i] = stacks->sorted_a[j];
+	stacks->sorted_a[j] = tmp;
+}
+
 int	sorted(t_stacks *stacks)
 {
 	int	i;
 	int	j;
-	int	tmp;
 
 	i = -1;
+	stacks->max_b = -2147483649;
+	stacks->min_b = 2147483648;
 	while (++i < stacks->size_a - 1)
 	{
 		j = i;
 		while (++j < stacks->size_a)
 		{
 			if (stacks->sorted_a[i] > stacks->sorted_a[j])
-			{
-				tmp = stacks->sorted_a[i];
-				stacks->sorted_a[i] = stacks->sorted_a[j];
-				stacks->sorted_a[j] = tmp;
-			}
+				swap_i_j(stacks, i, j);
 			else if (stacks->sorted_a[i] == stacks->sorted_a[j])
 			{
-				printf("Error: number %d appears more than once\n", \
-					stacks->sorted_a[i]);
+				printf("Error: duplication of %d\n", stacks->sorted_a[i]);
 				return (0);
 			}
 		}

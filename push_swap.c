@@ -6,11 +6,21 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:23:46 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/12 15:52:18 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/14 21:21:23 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	debug_tab(int *a, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+		printf("%d ", a[i++]);
+	printf ("\n");
+}
 
 int	ft_tab_len(char **tab)
 {
@@ -37,6 +47,7 @@ int	*ft_str_to_int(char **str_tab)
 	int		i;
 	int		n;
 	int		*int_tab;
+	long	tmp;
 
 	i = 0;
 	n = ft_tab_len(str_tab);
@@ -45,7 +56,14 @@ int	*ft_str_to_int(char **str_tab)
 		return (0);
 	while (str_tab[i])
 	{
-		int_tab[i] = ft_atoi(str_tab[i]);
+		tmp = ft_atoi(str_tab[i]);
+		if (tmp > 2147483647 || tmp < -2147483648)
+		{
+			printf("Only integers are allowed\n");
+			free(int_tab);
+			return (0);
+		}
+		int_tab[i] = tmp;
 		i++;
 	}
 	return (int_tab);
@@ -53,12 +71,19 @@ int	*ft_str_to_int(char **str_tab)
 
 void	push_swap(t_stacks *stacks)
 {
+	printf("pushing LIS to b \n");
 	push_lis(stacks);
+	debug_tab(stacks->a, stacks->size_a);
+	debug_tab(stacks->b, stacks->size_b);
+	printf("LIS pushed to b\n");
 	while (stacks->size_a > 0)
 	{
 		get_min_operation(stacks);
-		if (!push_it_to_a(stacks))
+		printf("push element to b, targets %d %d\n", stacks->target_a, stacks->target_b);
+		if (!push_it_to_b(stacks))
 			break ;
+		debug_tab(stacks->a, stacks->size_a);
+		debug_tab(stacks->b, stacks->size_b);
 	}
 }
 
@@ -72,6 +97,7 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 		return (0);
 	str = join_args(argv);
+	printf("sssss %s\n", str);
 	if (!str)
 		return (0);
 	str_tab = ft_split(str, ' ');
@@ -82,7 +108,11 @@ int	main(int argc, char **argv)
 		return (0);
 	if (!init_stacks(stacks, ft_tab_len(str_tab), int_tab))
 		return (0);
+	printf("size int_tab: %d \n", ft_tab_len(str_tab));
+	debug_tab(int_tab, ft_tab_len(str_tab));
 	push_swap(stacks);
+	debug_tab(stacks->a, stacks->size_a);
+	debug_tab(stacks->b, stacks->size_b);
 	while (stacks->size_a--)
 		free(str_tab[stacks->size_a]);
 	free(stacks->a);
