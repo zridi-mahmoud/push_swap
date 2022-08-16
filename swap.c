@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 16:39:40 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/14 15:52:30 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/15 22:33:47 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	check_max_min(t_stacks *stacks, int n)
 {
-	if (n > stacks->max_b)
-		stacks->max_b = n;
-	if (n < stacks->min_b)
-		stacks->min_b = n;
+	if (n > stacks->max_a)
+		stacks->max_a = n;
+	if (n < stacks->min_a)
+		stacks->min_a = n;
 }
 
 void	sa(t_stacks *stacks, int type, int print)
@@ -55,17 +55,17 @@ void	pa(t_stacks *stacks, int type)
 
 	if (type)
 	{
-		printf("pa\n");
+		save_op(stacks, "pa ");
 		tmp = stacks->b[stacks->size_b - 1];
+		check_max_min(stacks, tmp);
 		stacks->size_b -= 1;
 		stacks->a[stacks->size_a] = tmp;
 		stacks->size_a += 1;
 	}
 	else
 	{
-		printf("pb\n");
+		save_op(stacks, "pb ");
 		tmp = stacks->a[stacks->size_a - 1];
-		check_max_min(stacks, tmp);
 		stacks->size_a -= 1;
 		stacks->b[stacks->size_b] = tmp;
 		stacks->size_b += 1;

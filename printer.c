@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 22:12:58 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/14 23:58:39 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/15 21:18:56 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,10 @@ void	save_op(t_stacks *stacks, char *s)
 	char	*tmp;
 
 	tmp = stacks->operations;
-	stacks->operations = ft_strjoin(tmp, " ");
+	stacks->operations = ft_strjoin(tmp, s);
 	free(tmp);
 	if (!stacks->operations)
-		return (0);
-	stacks->operations = ft_strjoin(tmp, s);
-	if (!stacks->operations)
-		return (0);
+		return ;
 }
 
 void	printer(int n, char *op)
@@ -71,23 +68,30 @@ void	compress(t_stacks *stacks)
 	int		ra;
 	int		rb;
 
-	op = ft_split(stacks->operations, " ");
+	op = ft_split(stacks->operations, ' ');
 	ra = 0;
 	rb = 0;
 	while (*op)
 	{
-		while (*op && *op != "pa" && *op != "pb")
+		while (*op && (*op)[0] != 'p')
 		{
-			if (*op == "ra")
+			if ((*op)[0] == 'r' && (*op)[1] == 'a')
 				ra += 1;
-			else if (*op == "rb")
+			else if ((*op)[0] == 'r' && (*op)[1] == 'b')
 				rb += 1;
-			else if (*op == "rra")
+			else if ((*op)[0] == 'r' && (*op)[1] == 'r' && (*op)[2] == 'a')
 				ra -= 1;
-			else if (*op == "rrb")
+			else if ((*op)[0] == 'r' && (*op)[1] == 'r' && (*op)[2] == 'b')
 				rb -= 1;
 			op++;
 		}
 		print(ra, rb);
+		ra = 0;
+		rb = 0;
+		if (*op)
+		{
+			printf("%s\n", *op);
+			op++;
+		}
 	}
 }

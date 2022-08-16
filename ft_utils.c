@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 12:11:03 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/14 22:33:02 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/16 23:48:27 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	sorted(t_stacks *stacks)
 	int	j;
 
 	i = -1;
-	stacks->max_b = -2147483649;
-	stacks->min_b = 2147483648;
+	stacks->max_a = -2147483648;
+	stacks->min_a = 2147483647;
 	while (++i < stacks->size_a - 1)
 	{
 		j = i;
@@ -60,6 +60,9 @@ int	init_stacks(t_stacks *stacks, int size, int *int_tab)
 		free(stacks->b);
 		return (0);
 	}
+	i = 1;
+	while (i++ < size)
+		stacks->min_operations[i] = 1000000000;
 	stacks->sorted_a = (int *)malloc(sizeof(int) * size);
 	if (!stacks->sorted_a)
 	{
@@ -88,7 +91,9 @@ void	push_lis(t_stacks *stacks)
 {
 	int	*dp;
 	int	*seq;
+	int	i;
 
+	i = 0;
 	seq = NULL;
 	dp = (int *)malloc(sizeof(int) * stacks->size_a);
 	if (!dp)
@@ -97,14 +102,16 @@ void	push_lis(t_stacks *stacks)
 		return ;
 	}
 	seq = lis(stacks, dp);
-	while (stacks->size_seq > 0)
+	while (stacks->size_seq > i && stacks->size_seq != stacks->size_a)
 	{
-		if (seq[stacks->size_seq - 1] == stacks->a[stacks->size_a - 1])
-			pa(stacks, 0 * stacks->size_seq--);
-		else
+		if (seq[i] == stacks->a[i])
+		{
 			ra(stacks, 1, 1);
+			stacks->size_seq--;
+		}
+		else
+			pa(stacks, 0);
 	}
 	free(seq);
 	free(dp);
-	// printf("%d %d\n", stacks->size_a, stacks->size_b);
 }

@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 17:55:26 by mzridi            #+#    #+#             */
-/*   Updated: 2022/07/02 22:56:53 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/15 22:47:18 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ra(t_stacks *stacks, int type, int print)
 	if (type)
 	{
 		if (print)
-			printf("ra\n");
+			save_op(stacks, "ra ");
 		i = stacks->size_a;
 		tmp = stacks->a[stacks->size_a - 1];
 		while (--i > 0)
@@ -30,7 +30,7 @@ void	ra(t_stacks *stacks, int type, int print)
 	else
 	{
 		if (print)
-			printf("rb\n");
+			save_op(stacks, "rb ");
 		i = stacks->size_b;
 		tmp = stacks->b[stacks->size_b - 1];
 		while (--i > 0)
@@ -54,7 +54,7 @@ void	rra(t_stacks *stacks, int type, int print)
 	if (type)
 	{
 		if (print)
-			printf("rra\n");
+			save_op(stacks, "rra ");
 		i = -1;
 		tmp = stacks->a[0];
 		while (++i < stacks->size_a - 1)
@@ -64,7 +64,7 @@ void	rra(t_stacks *stacks, int type, int print)
 	else
 	{
 		if (print)
-			printf("rrb\n");
+			save_op(stacks, "rrb ");
 		i = -1;
 		tmp = stacks->b[0];
 		while (++i < stacks->size_b - 1)

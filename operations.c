@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 22:36:19 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/14 22:16:04 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/16 22:38:36 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ int	up_or_down(int i, int j, t_stacks *stacks, int type)
 void	set_min_operations(t_stacks *stacks, int *min_op, int i, int j)
 {
 	*min_op = stacks->min_operations[i];
-	stacks->target_a = i;
-	stacks->target_b = j;
+	stacks->target_b = i;
+	stacks->target_a = j;
 }
 
 void	get_min_operation(t_stacks *stacks)
@@ -70,24 +70,27 @@ void	get_min_operation(t_stacks *stacks)
 	min_op = malloc(sizeof(int));
 	if (!min_op)
 		printf("Error while allocating variable");
-	*min_op = 1000000;
-	while (i < stacks->size_a)
+	*min_op = 1000000000;
+	while (i < stacks->size_b)
 	{
 		j = 0;
-		while (j < stacks->size_b)
+		while (j < stacks->size_a)
 		{
 			jj = j + 1;
-			if (jj == stacks->size_b)
+			if (jj == stacks->size_a)
 				jj = 0;
-			if ((stacks->a[i] < stacks->b[j] && stacks->a[i] > stacks->b[jj] && stacks->b[jj] < stacks->b[j]) \
-			|| (stacks->a[i] > stacks->b[j] && stacks->a[i] < stacks->b[jj] && stacks->b[jj] > stacks->b[jj]) \
-			|| (stacks->a[i] > stacks->max_b && stacks->b[jj] == stacks->max_b) \
-			|| (stacks->a[i] < stacks->min_b && stacks->b[jj] == stacks->min_b))
+			if ((stacks->b[i] > stacks->a[j] && stacks->b[i] < stacks->a[jj]) \
+			|| (stacks->b[i] > stacks->max_a && stacks->a[j] == stacks->max_a) \
+			|| (stacks->b[i] < stacks->min_a && stacks->a[jj] == stacks->min_a))
 			{
-				stacks->min_operations[i] = up_or_down(i, j, stacks, 0);
+				stacks->min_operations[i] = up_or_down(j, i, stacks, 0);
 				if (i == 0 || *min_op > stacks->min_operations[i])
 					set_min_operations(stacks, min_op, i, j);
 				break ;
+			}
+			else
+			{
+				stacks->min_operations[i] = 1000000000;
 			}
 			j++;
 		}
@@ -95,12 +98,11 @@ void	get_min_operation(t_stacks *stacks)
 	}
 }
 
-int	push_it_to_b(t_stacks *stacks)
+int	push_it_to_a(t_stacks *stacks)
 {
 	int	type;
 
 	type = up_or_down(stacks->target_a, stacks->target_b, stacks, 1);
-	// printf("type :%d \n", type);
 	if (type == 1)
 		r_up_up(stacks);
 	else if (type == 2)
@@ -114,6 +116,6 @@ int	push_it_to_b(t_stacks *stacks)
 		printf("something is wrong");
 		return (0);
 	}
-	pa(stacks, 0);
+	pa(stacks, 1);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:23:46 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/14 22:18:33 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/16 23:26:50 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,46 @@ int	*ft_str_to_int(char **str_tab)
 	return (int_tab);
 }
 
+void	get_min_max(t_stacks *stacks)
+{
+	int	i;
+
+	i = 0;
+	while (i < stacks->size_a)
+	{
+		if (stacks->a[i] > stacks->max_a)
+			stacks->max_a = stacks->a[i];
+		if (stacks->a[i] < stacks->min_a)
+			stacks->min_a = stacks->a[i];
+		i++;
+	}
+}
+
+void	flip_a(t_stacks *stacks)
+{
+	int	i;
+	int	tmp;
+
+	i = stacks->size_a / 2;
+	while (i--)
+	{
+		tmp = stacks->a[i];
+		stacks->a[i] = stacks->a[stacks->size_a - i - 1];
+		stacks->a[stacks->size_a - i - 1] = tmp;
+	}
+}
+
 void	push_swap(t_stacks *stacks)
 {
 	push_lis(stacks);
-	while (stacks->size_a > 0)
+	get_min_max(stacks);
+	while (stacks->size_b > 0)
 	{
+		// debug_tab(stacks->a, stacks->size_a);
+		// debug_tab(stacks->b, stacks->size_b);
+		// printf("-----\n");
 		get_min_operation(stacks);
-		if (!push_it_to_b(stacks))
+		if (!push_it_to_a(stacks))
 			break ;
 	}
 }
@@ -100,10 +133,12 @@ int	main(int argc, char **argv)
 		return (0);
 	if (!init_stacks(stacks, ft_tab_len(str_tab), int_tab))
 		return (0);
-	debug_tab(int_tab, ft_tab_len(str_tab));
-	push_swap(stacks);
 	debug_tab(stacks->a, stacks->size_a);
-	debug_tab(stacks->b, stacks->size_b);
+	flip_a(stacks);
+	debug_tab(stacks->a, stacks->size_a);
+	push_swap(stacks);
+	compress(stacks);
+	debug_tab(stacks->a, stacks->size_a);
 	while (stacks->size_a--)
 		free(str_tab[stacks->size_a]);
 	free(stacks->a);
