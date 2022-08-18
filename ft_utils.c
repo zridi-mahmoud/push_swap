@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 12:11:03 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/16 23:48:27 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/18 21:07:30 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,10 @@ void	push_lis(t_stacks *stacks)
 	int	*dp;
 	int	*seq;
 	int	i;
+	int	j;
 
 	i = 0;
+	j = stacks->size_a;
 	seq = NULL;
 	dp = (int *)malloc(sizeof(int) * stacks->size_a);
 	if (!dp)
@@ -102,15 +104,18 @@ void	push_lis(t_stacks *stacks)
 		return ;
 	}
 	seq = lis(stacks, dp);
-	while (stacks->size_seq > i && stacks->size_seq != stacks->size_a)
+	while ((stacks->size_seq > i || j > 0) && stacks->size_seq != stacks->size_a)
 	{
-		if (seq[i] == stacks->a[i])
+		if (i >= stacks->size_a)
+			pb(stacks);
+		else if (seq[i] == stacks->a[0])
 		{
 			ra(stacks, 1, 1);
-			stacks->size_seq--;
+			i++;
 		}
 		else
-			pa(stacks, 0);
+			pb(stacks);
+		j--;
 	}
 	free(seq);
 	free(dp);

@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:20:15 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/15 22:29:32 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/18 22:23:09 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_stacks
 	int		max_a;
 	int		min_a;
 	char	*operations;
+	int		rotations;
 }				t_stacks;
 
 char	**ft_split(char const *s, char c);
@@ -42,7 +43,8 @@ int		ft_atoi(const char *str);
 int		*lis(t_stacks *stacks, int *dp);
 void	sa(t_stacks *stacks, int type, int print);
 void	ss(t_stacks *stacks);
-void	pa(t_stacks *stacks, int type);
+void	pa(t_stacks *stacks);
+void	pb(t_stacks *stacks);
 void	ra(t_stacks *stacks, int type, int print);
 void	rr(t_stacks *stacks);
 void	rra(t_stacks *stacks, int type, int print);
@@ -58,5 +60,6 @@ void	push_lis(t_stacks *stacks);
 char	*ft_strjoin(char const *s1, char const *s2);
 void	save_op(t_stacks *stacks, char *s);
 void	compress(t_stacks *stacks);
+int		max(int a, int b);
 
 #endif

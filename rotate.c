@@ -6,13 +6,13 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 17:55:26 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/15 22:47:18 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/18 20:50:00 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ra(t_stacks *stacks, int type, int print)
+void	rra(t_stacks *stacks, int type, int print)
 {
 	int	tmp;
 	int	i;
@@ -20,7 +20,7 @@ void	ra(t_stacks *stacks, int type, int print)
 	if (type)
 	{
 		if (print)
-			save_op(stacks, "ra ");
+			save_op(stacks, "rra ");
 		i = stacks->size_a;
 		tmp = stacks->a[stacks->size_a - 1];
 		while (--i > 0)
@@ -30,7 +30,7 @@ void	ra(t_stacks *stacks, int type, int print)
 	else
 	{
 		if (print)
-			save_op(stacks, "rb ");
+			save_op(stacks, "rrb ");
 		i = stacks->size_b;
 		tmp = stacks->b[stacks->size_b - 1];
 		while (--i > 0)
@@ -46,7 +46,7 @@ void	rr(t_stacks *stacks)
 	ra(stacks, 0, 0);
 }
 
-void	rra(t_stacks *stacks, int type, int print)
+void	ra(t_stacks *stacks, int type, int print)
 {
 	int	tmp;
 	int	i;
@@ -54,7 +54,7 @@ void	rra(t_stacks *stacks, int type, int print)
 	if (type)
 	{
 		if (print)
-			save_op(stacks, "rra ");
+			save_op(stacks, "ra ");
 		i = -1;
 		tmp = stacks->a[0];
 		while (++i < stacks->size_a - 1)
@@ -64,7 +64,7 @@ void	rra(t_stacks *stacks, int type, int print)
 	else
 	{
 		if (print)
-			save_op(stacks, "rrb ");
+			save_op(stacks, "rb ");
 		i = -1;
 		tmp = stacks->b[0];
 		while (++i < stacks->size_b - 1)

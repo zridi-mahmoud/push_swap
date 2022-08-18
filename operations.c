@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 22:36:19 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/16 22:38:36 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/18 20:57:46 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ int	up_or_down(int i, int j, t_stacks *stacks, int type)
 	int	up_dwn;
 	int	dwn_up;
 
-	two_up = max(stacks->size_a - i - 1, stacks->size_b - j - 1);
-	two_dwn = max(i + 1, j + 1);
-	up_dwn = stacks->size_a - i - 1 + j + 1;
-	dwn_up = i + 1 + stacks->size_b - j - 1;
+	two_up = max(i, j);
+	two_dwn = max(stacks->size_a - i, stacks->size_b - j);
+	up_dwn = i + stacks->size_b - j;
+	dwn_up = stacks->size_a - i + j;
 	if (two_up <= two_dwn && two_up <= up_dwn && two_up <= dwn_up && !type)
 		return (two_up);
 	if (two_dwn <= two_up && two_dwn <= up_dwn && two_dwn <= dwn_up && !type)
@@ -76,12 +76,12 @@ void	get_min_operation(t_stacks *stacks)
 		j = 0;
 		while (j < stacks->size_a)
 		{
-			jj = j + 1;
-			if (jj == stacks->size_a)
-				jj = 0;
-			if ((stacks->b[i] > stacks->a[j] && stacks->b[i] < stacks->a[jj]) \
-			|| (stacks->b[i] > stacks->max_a && stacks->a[j] == stacks->max_a) \
-			|| (stacks->b[i] < stacks->min_a && stacks->a[jj] == stacks->min_a))
+			jj = j - 1;
+			if (j == 0)
+				jj = stacks->size_a - 1;
+			if ((stacks->b[i] < stacks->a[j] && stacks->b[i] > stacks->a[jj]) \
+			|| (stacks->b[i] > stacks->a[jj] && stacks->a[jj] == stacks->max_a) \
+			|| (stacks->b[i] < stacks->min_a && stacks->a[j] == stacks->min_a))
 			{
 				stacks->min_operations[i] = up_or_down(j, i, stacks, 0);
 				if (i == 0 || *min_op > stacks->min_operations[i])
@@ -89,9 +89,7 @@ void	get_min_operation(t_stacks *stacks)
 				break ;
 			}
 			else
-			{
 				stacks->min_operations[i] = 1000000000;
-			}
 			j++;
 		}
 		i++;
@@ -116,6 +114,6 @@ int	push_it_to_a(t_stacks *stacks)
 		printf("something is wrong");
 		return (0);
 	}
-	pa(stacks, 1);
+	pa(stacks);
 	return (1);
 }

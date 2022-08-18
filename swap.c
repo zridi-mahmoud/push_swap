@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 16:39:40 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/15 22:33:47 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/17 22:34:32 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,25 +49,35 @@ void	ss(t_stacks *stacks)
 	sa(stacks, 0, 0);
 }
 
-void	pa(t_stacks *stacks, int type)
+void	pa(t_stacks *stacks)
 {
 	int	tmp;
+	int	i;
 
-	if (type)
-	{
-		save_op(stacks, "pa ");
-		tmp = stacks->b[stacks->size_b - 1];
-		check_max_min(stacks, tmp);
-		stacks->size_b -= 1;
-		stacks->a[stacks->size_a] = tmp;
-		stacks->size_a += 1;
-	}
-	else
-	{
-		save_op(stacks, "pb ");
-		tmp = stacks->a[stacks->size_a - 1];
-		stacks->size_a -= 1;
-		stacks->b[stacks->size_b] = tmp;
-		stacks->size_b += 1;
-	}
+	save_op(stacks, "pa ");
+	tmp = stacks->b[0];
+	check_max_min(stacks, tmp);
+	stacks->size_a += 1;
+	i = stacks->size_a;
+	while (--i > 0)
+		stacks->a[i] = stacks->a[i - 1];
+	stacks->a[0] = tmp;
+	ra(stacks, 0, 0);
+	stacks->size_b -= 1;
+}
+
+void	pb(t_stacks *stacks)
+{
+	int	tmp;
+	int	i;
+
+	save_op(stacks, "pb ");
+	tmp = stacks->a[0];
+	stacks->size_b += 1;
+	i = stacks->size_b;
+	while (--i > 0)
+		stacks->b[i] = stacks->b[i - 1];
+	stacks->b[0] = tmp;
+	ra(stacks, 1, 0);
+	stacks->size_a -= 1;
 }

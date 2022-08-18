@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 17:32:59 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/16 22:56:04 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/18 22:40:42 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// the longest increasing subsequence 
 
 int	lis_size(int *arr, int size, int *dp)
 {
@@ -67,4 +66,41 @@ int	*lis(t_stacks *stacks, int *dp)
 		i++;
 	}
 	return (seq);
+}
+
+int	*rot_a(int *a, int size)
+{
+	int	tmp;
+	int	i;
+
+	i = -1;
+	tmp = a[0];
+	while (++i < size - 1)
+		a[i] = a[i + 1];
+	a[size - 1] = tmp;
+}
+
+void	best_lis(t_stacks *stacks, int *dp)
+{
+	int	*a;
+	int	i;
+	int	best;
+	int	tmp;
+
+	best = 0;
+	stacks->rotations = 0;
+	a = (int *)malloc(sizeof(int) * stacks->size_a);
+	i = -1;
+	while (++i < stacks->size_a)
+		a[i] = stacks->a[i];
+	i = -1;
+	while (++i < stacks->size_a)
+	{
+		tmp = lis_size(a, stacks->size_a, dp);
+		if (tmp > best + i)
+		{
+			best = tmp;
+			stacks->rotations = i;
+		}
+	}
 }

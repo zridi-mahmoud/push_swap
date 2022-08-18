@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:23:46 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/16 23:26:50 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/18 21:03:15 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,18 +84,20 @@ void	get_min_max(t_stacks *stacks)
 	}
 }
 
-void	flip_a(t_stacks *stacks)
+void	rotate_a(t_stacks *stacks)
 {
 	int	i;
-	int	tmp;
 
-	i = stacks->size_a / 2;
-	while (i--)
-	{
-		tmp = stacks->a[i];
-		stacks->a[i] = stacks->a[stacks->size_a - i - 1];
-		stacks->a[stacks->size_a - i - 1] = tmp;
-	}
+	i = -1;
+	while (++i < stacks->size_a)
+		if (stacks->a[i] == stacks->min_a)
+			break ;
+	if (i < stacks->size_a / 2)
+		while (i--)
+			ra(stacks, 1, 1);
+	else
+		while (i++ < stacks->size_a)
+			rra(stacks, 1, 1);
 }
 
 void	push_swap(t_stacks *stacks)
@@ -104,13 +106,11 @@ void	push_swap(t_stacks *stacks)
 	get_min_max(stacks);
 	while (stacks->size_b > 0)
 	{
-		// debug_tab(stacks->a, stacks->size_a);
-		// debug_tab(stacks->b, stacks->size_b);
-		// printf("-----\n");
 		get_min_operation(stacks);
 		if (!push_it_to_a(stacks))
 			break ;
 	}
+	rotate_a(stacks);
 }
 
 int	main(int argc, char **argv)
@@ -123,6 +123,10 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 		return (0);
 	str = join_args(argv);
+	// (void)argc;
+	// (void)argv;
+	// char	*test[] = {"", "1 3 2 5 0 -1", NULL};
+	// str = join_args(test);
 	if (!str)
 		return (0);
 	str_tab = ft_split(str, ' ');
@@ -133,9 +137,6 @@ int	main(int argc, char **argv)
 		return (0);
 	if (!init_stacks(stacks, ft_tab_len(str_tab), int_tab))
 		return (0);
-	debug_tab(stacks->a, stacks->size_a);
-	flip_a(stacks);
-	debug_tab(stacks->a, stacks->size_a);
 	push_swap(stacks);
 	compress(stacks);
 	debug_tab(stacks->a, stacks->size_a);
