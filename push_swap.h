@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:20:15 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/18 22:23:09 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/18 22:56:05 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_stacks
 	int		max_a;
 	int		min_a;
 	char	*operations;
-	int		rotations;
+	int		*two_a;
 }				t_stacks;
 
 char	**ft_split(char const *s, char c);
