@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 22:36:19 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/18 20:57:46 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/20 15:04:22 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	get_min_operation(t_stacks *stacks)
 			|| (stacks->b[i] < stacks->min_a && stacks->a[j] == stacks->min_a))
 			{
 				stacks->min_operations[i] = up_or_down(j, i, stacks, 0);
-				if (i == 0 || *min_op > stacks->min_operations[i])
+				if (i == 0 || *min_op > stacks->min_operations[i] + i)
 					set_min_operations(stacks, min_op, i, j);
 				break ;
 			}
