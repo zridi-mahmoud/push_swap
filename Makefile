@@ -6,7 +6,7 @@
 #    By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:28:33 by mzridi            #+#    #+#              #
-#    Updated: 2022/08/15 21:05:13 by mzridi           ###   ########.fr        #
+#    Updated: 2022/08/20 22:33:00 by mzridi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = push_swap
 
 CC = gcc
 
-SRC = push_swap.c ft_split.c ft_join.c ft_atoi.c ft_lis.c swap.c rotate.c ft_utils.c rotate_stacks.c operations.c printer.c
+SRC = push_swap.c ft_split.c ft_join.c ft_atoi.c ft_lis.c swap.c rotate.c ft_utils.c rotate_stacks.c operations.c printer.c ft_free.c tab_operations.c
 BONUS_SRC = push_swap_bonus.c ft_split.c ft_join.c ft_lis.c swap.c rotate.c ft_utils.c
 
 OBJ = $(SRC:.c=.o) 

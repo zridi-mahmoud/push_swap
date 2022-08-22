@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 12:11:03 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/18 22:58:00 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/22 23:34:57 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,60 +21,14 @@ void	swap_i_j(t_stacks *stacks, int i, int j)
 	stacks->sorted_a[j] = tmp;
 }
 
-int	sorted(t_stacks *stacks)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	stacks->max_a = -2147483648;
-	stacks->min_a = 2147483647;
-	while (++i < stacks->size_a - 1)
-	{
-		j = i;
-		while (++j < stacks->size_a)
-		{
-			if (stacks->sorted_a[i] > stacks->sorted_a[j])
-				swap_i_j(stacks, i, j);
-			else if (stacks->sorted_a[i] == stacks->sorted_a[j])
-			{
-				printf("Error: duplication of %d\n", stacks->sorted_a[i]);
-				return (0);
-			}
-		}
-	}
-	return (1);
-}
-
-int	init_stacks(t_stacks *stacks, int size, int *int_tab)
+int	init_stacks_helper(t_stacks *stacks, int size)
 {
 	int	i;
 
-	stacks->a = int_tab;
-	stacks->b = (int *)malloc(sizeof(int) * size);
-	if (!stacks->b)
-		return (0);
-	stacks->min_operations = (int *)malloc(sizeof(int) * size);
-	if (!stacks->min_operations)
-	{
-		free(stacks->b);
-		return (0);
-	}
-	i = 1;
-	while (i++ < size)
-		stacks->min_operations[i] = 1000000000;
-	stacks->sorted_a = (int *)malloc(sizeof(int) * size);
-	if (!stacks->sorted_a)
-	{
-		free(stacks->b);
-		free(stacks->min_operations);
-		return (0);
-	}
 	stacks->operations = (char *)malloc(sizeof(char) * 1);
 	if (!stacks->operations)
 	{
 		free(stacks->b);
-		free(stacks->min_operations);
 		free(stacks->sorted_a);
 		return (0);
 	}
@@ -84,39 +38,66 @@ int	init_stacks(t_stacks *stacks, int size, int *int_tab)
 	i = -1;
 	while (++i < size)
 		stacks->sorted_a[i] = stacks->a[i];
+	stacks->rotations = 0;
+	return (1);
+}
+
+int	init_stacks(t_stacks *stacks, int size, int *int_tab)
+{
+	stacks->a = int_tab;
+	stacks->b = (int *)malloc(sizeof(int) * size);
+	if (!stacks->b)
+		return (0);
+	stacks->sorted_a = (int *)malloc(sizeof(int) * size);
+	if (!stacks->sorted_a)
+	{
+		free(stacks->b);
+		return (0);
+	}
+	if (!init_stacks_helper(stacks, size))
+		return (0);
 	return (sorted(stacks));
 }
 
-void	push_lis(t_stacks *stacks)
+void	push_lis_helper(t_stacks *stacks, int *seq)
 {
-	int	*dp;
-	int	*seq;
 	int	i;
-	int	j;
 
 	i = 0;
-	j = stacks->size_a;
-	seq = NULL;
-	dp = (int *)malloc(sizeof(int) * stacks->size_a * 2);
-	if (!dp)
+	while (stacks->size_a > stacks->size_seq)
 	{
-		free(seq);
-		return ;
-	}
-	seq = lis(stacks, dp);
-	while ((stacks->size_seq > i || j > 0) && stacks->size_seq != stacks->size_a)
-	{
-		if (i >= stacks->size_a)
-			pb(stacks);
-		else if (seq[i] == stacks->a[0])
+		if (seq[i] == stacks->a[0])
 		{
 			ra(stacks, 1, 1);
 			i++;
 		}
 		else
 			pb(stacks);
-		j--;
 	}
+	// debug_tab(seq, stacks->size_a + stacks->size_b);
+}
+
+int	push_lis(t_stacks *stacks)
+{
+	int	*dp;
+	int	*seq;
+
+	seq = NULL;
+	dp = (int *)malloc(sizeof(int) * stacks->size_a);
+	if (!dp)
+	{
+		printf("Error\n");
+		return (0);
+	}
+	seq = lis(stacks, dp);
+	if (!seq)
+	{
+		free(dp);
+		printf("Error\n");
+		return (0);
+	}
+	push_lis_helper(stacks, seq);
 	free(seq);
 	free(dp);
+	return (1);
 }

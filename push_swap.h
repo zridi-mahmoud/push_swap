@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:20:15 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/20 13:42:30 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/22 23:35:03 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,18 @@ typedef struct s_stacks
 	int		*b;
 	int		size_seq;
 	int		*sorted_a;
-	int		*min_operations;
 	int		target_a;
 	int		target_b;
 	int		error;
-	char	*error_message;
 	int		max_a;
 	int		min_a;
 	char	*operations;
-	int		*two_a;
 	int		rotations;
+	int		*v_a;
 }				t_stacks;
 
 char	**ft_split(char const *s, char c);
-char	*join_args(char **args);
+char	*join_args(char **args, int i);
 size_t	ft_strlen(const char *s);
 int		ft_atoi(const char *str);
 int		*lis(t_stacks *stacks, int *dp);
@@ -57,11 +55,19 @@ void	r_down_down(t_stacks *stacks);
 void	r_up_down(t_stacks *stacks);
 void	r_down_up(t_stacks *stacks);
 int		push_it_to_a(t_stacks *stacks);
-void	push_lis(t_stacks *stacks);
+int		push_lis(t_stacks *stacks);
 char	*ft_strjoin(char const *s1, char const *s2);
 void	save_op(t_stacks *stacks, char *s);
-void	compress(t_stacks *stacks);
+void	compress(int ra, int rb, char **op);
 int		max(int a, int b);
 void	debug_tab(int *a, int size);
+void	free_tab(char **t);
+void	free_stack(t_stacks *stacks, char **str_tab);
+int		sorted(t_stacks *stacks);
+void	get_min_max(t_stacks *stacks);
+void	rotate_a(t_stacks *stacks);
+int		ft_tab_len(char **tab);
+int		tab_int_len(int *tab);
+void	swap_i_j(t_stacks *stacks, int i, int j);
 
 #endif

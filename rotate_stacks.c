@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 18:16:11 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/18 20:49:37 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/22 22:12:33 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ void	r_up_down(t_stacks *stacks)
 	j = stacks->target_b;
 	while (i-- > 0)
 		ra(stacks, 1, 1);
-	while (j++ <= stacks->size_a - 1)
+	while (j++ <= stacks->size_b - 1)
 		rra(stacks, 0, 1);
 }

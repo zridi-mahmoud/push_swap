@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 13:35:34 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/14 22:26:56 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/20 23:07:45 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,16 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (result);
 }
 
-char	*join_args(char **args)
+char	*join_args(char **args, int i)
 {
 	char	*tmp;
 	char	*tmp2;
 	char	*result;
-	int		i;
 
 	result = (char *)malloc(sizeof(char) * 1);
 	if (!result)
 		return (NULL);
 	result[0] = 0;
-	i = 1;
 	while (args[i])
 	{
 		tmp = result;

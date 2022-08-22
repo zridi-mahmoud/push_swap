@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 22:12:58 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/15 21:18:56 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/20 22:46:12 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	printer(int n, char *op)
 			printf("r%s\n", op);
 }
 
-void	print(int ra, int rb)
+int	print(int ra, int rb, char **op)
 {
 	int	rr;
 
@@ -60,19 +60,23 @@ void	print(int ra, int rb)
 	printer(rr, "rr");
 	printer(ra - rr, "ra");
 	printer(rb - rr, "rb");
+	if (*op)
+	{
+		printf("%s\n", *op);
+		return (1);
+	}
+	return (0);
 }
 
-void	compress(t_stacks *stacks)
+void	compress(int ra, int rb, char **op)
 {
-	char	**op;
-	int		ra;
-	int		rb;
+	char	**tmp;
 
-	op = ft_split(stacks->operations, ' ');
-	ra = 0;
-	rb = 0;
+	tmp = op;
 	while (*op)
 	{
+		ra = 0;
+		rb = 0;
 		while (*op && (*op)[0] != 'p')
 		{
 			if ((*op)[0] == 'r' && (*op)[1] == 'a')
@@ -85,13 +89,8 @@ void	compress(t_stacks *stacks)
 				rb -= 1;
 			op++;
 		}
-		print(ra, rb);
-		ra = 0;
-		rb = 0;
-		if (*op)
-		{
-			printf("%s\n", *op);
+		if (print(ra, rb, op))
 			op++;
-		}
 	}
+	free_tab(tmp);
 }

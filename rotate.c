@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 17:55:26 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/18 20:50:00 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/20 22:26:12 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,11 @@ void	rrr(t_stacks *stacks)
 	printf("rrr\n");
 	rra(stacks, 1, 0);
 	rra(stacks, 0, 0);
+}
+
+int	max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
 }
