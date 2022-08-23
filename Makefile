@@ -6,7 +6,7 @@
 #    By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:28:33 by mzridi            #+#    #+#              #
-#    Updated: 2022/08/20 22:33:00 by mzridi           ###   ########.fr        #
+#    Updated: 2022/08/23 19:43:00 by mzridi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ NAME = push_swap
 
 CC = gcc
 
-SRC = push_swap.c ft_split.c ft_join.c ft_atoi.c ft_lis.c swap.c rotate.c ft_utils.c rotate_stacks.c operations.c printer.c ft_free.c tab_operations.c
-BONUS_SRC = push_swap_bonus.c ft_split.c ft_join.c ft_lis.c swap.c rotate.c ft_utils.c
+SRC = push_swap.c ft_split.c ft_join.c ft_atoi.c ft_lis.c swap.c rotate.c ft_utils.c rotate_stacks.c operations.c printer.c ft_free.c tab_operations.c push_swap_helper.c
+BONUS_SRC = ft_split.c ft_join.c ft_atoi.c ft_lis.c swap.c rotate.c ft_utils.c rotate_stacks.c operations.c printer.c ft_free.c tab_operations.c  get_next_line.c get_next_line_utils.c checker.c push_swap_helper.c
 
 OBJ = $(SRC:.c=.o) 
 
@@ -25,7 +25,7 @@ BONUS_OBJ = $(BONUS_SRC:.c=.o)
 all: $(NAME)
 
 bonus: $(BONUS_OBJ)
-	$(CC) $(BONUS_OBJ) -o push_swap_bonus
+	$(CC) $(BONUS_OBJ) -o checker
 
 $(NAME): $(OBJ)
 	$(CC) $(OBJ) -g -o $(NAME)

@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 17:55:26 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/20 22:26:12 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/23 20:54:38 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,10 @@ void	rra(t_stacks *stacks, int type, int print)
 	}
 }
 
-void	rr(t_stacks *stacks)
+void	rr(t_stacks *stacks, int print)
 {
-	printf("rr\n");
+	if (print)
+		printf("rr\n");
 	ra(stacks, 1, 0);
 	ra(stacks, 0, 0);
 }
@@ -73,9 +74,10 @@ void	ra(t_stacks *stacks, int type, int print)
 	}
 }
 
-void	rrr(t_stacks *stacks)
+void	rrr(t_stacks *stacks, int print)
 {
-	printf("rrr\n");
+	if (print)
+		printf("rrr\n");
 	rra(stacks, 1, 0);
 	rra(stacks, 0, 0);
 }

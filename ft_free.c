@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 20:07:59 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/22 23:34:32 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/23 21:32:22 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ void	free_tab(char **t)
 	free(ref);
 }
 
-void	free_stack(t_stacks *stacks, char **str_tab)
+void	free_stack(t_stacks *stacks)
 {
-	free_tab(str_tab);
 	free(stacks->a);
 	free(stacks->b);
 	free(stacks->sorted_a);
-	// free(stacks->v_a);
+	free(stacks->operations);
+	free(stacks);	
 }

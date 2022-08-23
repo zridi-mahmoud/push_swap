@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 12:11:03 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/22 23:34:57 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/23 21:20:46 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	init_stacks_helper(t_stacks *stacks, int size)
 	{
 		free(stacks->b);
 		free(stacks->sorted_a);
+		free(stacks);
 		return (0);
 	}
 	stacks->operations[0] = 0;
@@ -52,6 +53,7 @@ int	init_stacks(t_stacks *stacks, int size, int *int_tab)
 	if (!stacks->sorted_a)
 	{
 		free(stacks->b);
+		free(stacks);
 		return (0);
 	}
 	if (!init_stacks_helper(stacks, size))
@@ -74,7 +76,6 @@ void	push_lis_helper(t_stacks *stacks, int *seq)
 		else
 			pb(stacks);
 	}
-	// debug_tab(seq, stacks->size_a + stacks->size_b);
 }
 
 int	push_lis(t_stacks *stacks)

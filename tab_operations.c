@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 22:16:28 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/23 00:01:19 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/23 21:26:36 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	sorted(t_stacks *stacks)
 			if (stacks->sorted_a[i] > stacks->sorted_a[j])
 				swap_i_j(stacks, i, j);
 			else if (stacks->sorted_a[i] == stacks->sorted_a[j])
-				return (0);
+				return (free_stack(stacks), 0);
 		}
 	}
 	return (1);

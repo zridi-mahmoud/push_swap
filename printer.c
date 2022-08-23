@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 22:12:58 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/20 22:46:12 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/23 20:53:06 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ void	save_op(t_stacks *stacks, char *s)
 	tmp = stacks->operations;
 	stacks->operations = ft_strjoin(tmp, s);
 	free(tmp);
-	if (!stacks->operations)
-		return ;
 }
 
 void	printer(int n, char *op)
