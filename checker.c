@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 19:21:20 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/23 20:54:58 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/24 23:07:31 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,13 @@ int	execute_op(char *op, t_stacks	*stacks)
 		rr(stacks, 0);
 	else if (!ft_strcmp(op, "rrr\n"))
 		rrr(stacks, 0);
-	else 
+	else if (!ft_strcmp(op, "sa\n"))
+		sa(stacks, 1, 0);
+	else if (!ft_strcmp(op, "sb\n"))
+		sa(stacks, 0, 0);
+	else if (!ft_strcmp(op, "ss\n"))
+		ss(stacks, 0);
+	else
 		return (0);
 	return (1);
 }
@@ -68,7 +74,7 @@ int	is_sorted(t_stacks *s)
 
 	i = 0;
 	if (s->size_b != 0)
-		return(0);
+		return (0);
 	while (i < s->size_a)
 	{
 		if (s->sorted_a[i] != s->a[i])
@@ -77,26 +83,25 @@ int	is_sorted(t_stacks *s)
 	}
 	return (1);
 }
+
 void	check(t_stacks *stacks)
 {
 	char	*op;
 	int		fd;
 
-	// fd = fileno(fopen("./instructions", "r"));
 	fd = 0;
 	op = NULL;
 	op = get_next_line(fd);
-	while(op)
+	while (op)
 	{
 		if (!execute_op(op, stacks))
 		{
-			if(op)
-				free(op);
-			printf("Error\n");
-		}
-		if (op)	
+			op = NULL;
 			free(op);
-		// printf("%s\n",op);
+			return (printf("Error\n"), 0);
+		}
+		if (op)
+			free(op);
 		op = get_next_line(fd);
 	}
 	if (is_sorted(stacks))
@@ -107,30 +112,22 @@ void	check(t_stacks *stacks)
 
 int	main(int argc, char **argv)
 {
-	char		**str_tab;
+	int			len;
 	int			*int_tab;
-	char		*str;
 	t_stacks	*stacks;
 
 	if (argc == 1)
 		return (0);
-	str = join_args(argv, 1);
-	if (!str)
-		return (0);
-	str_tab = ft_split(str, ' ');
-	free(str);
-	int_tab = ft_str_to_int(str_tab);
-	if (!int_tab)
-		return (1);
+	int_tab = 0;
+	len = get_inp(argv, &int_tab);
+	if (!len)
+		return (printf("Error\n"), 1);
 	stacks = (t_stacks *)malloc(sizeof(t_stacks));
 	if (!stacks)
-		return (0);
-	if (!init_stacks(stacks, ft_tab_len(str_tab), int_tab))
-	{
-		printf("Error\n");
-		return (1);
-	}
+		return (printf("Error\n"), 1);
+	if (!init_stacks(stacks, len, int_tab))
+		return (printf("Error\n"), 1);
 	check(stacks);
-	free_stack(stacks, str_tab);
+	free_stack(stacks);
 	return (0);
 }

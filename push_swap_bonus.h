@@ -6,12 +6,12 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:20:15 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/23 21:23:21 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/24 22:56:41 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef PUSH_SWAP_BONUS_H
+# define PUSH_SWAP_BONUS_H
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -41,7 +41,7 @@ size_t	ft_strlen(const char *s);
 long	ft_atoi(const char *str);
 int		*lis(t_stacks *stacks, int *dp);
 void	sa(t_stacks *stacks, int type, int print);
-void	ss(t_stacks *stacks);
+void	ss(t_stacks *stacks, int print);
 void	pa(t_stacks *stacks);
 void	pb(t_stacks *stacks);
 void	ra(t_stacks *stacks, int type, int print);
@@ -76,5 +76,8 @@ char	*ft_strdup(const char *s1);
 char	*return_line_helper(char **st_line, char *copy, char *line);
 char	*ft_next_line_helper(int int_var, char **line, char *copy, int fd);
 int		*ft_str_to_int(char **str_tab);
+int		get_inp(char **argv, int **int_inp);
+int		len(char *s);
+void	ft_putstr(char *s);
 
 #endif

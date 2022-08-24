@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 17:32:59 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/23 00:17:47 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/24 22:23:38 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	*copy(int *t, int size)
 	return (t_c);
 }
 
-int	*lis(t_stacks *stacks, int *dp)
+int	*lis(t_stacks *stacks, int *dp, int last)
 {
 	int	i;
 	int	j;
@@ -78,10 +78,9 @@ int	*lis(t_stacks *stacks, int *dp)
 	seq = (int *)malloc(sizeof(int) * size_seq);
 	if (!seq)
 		return (NULL);
-	i = 0;
+	i = -1;
 	j = 0;
-	int last = -1e9;
-	while (size_seq > 0)
+	while (size_seq > 0 * ++i)
 	{
 		if (dp[i] == size_seq && stacks->a[i] > last)
 		{
@@ -90,7 +89,6 @@ int	*lis(t_stacks *stacks, int *dp)
 			j++;
 			last = stacks->a[i];
 		}
-		i++;
 	}
 	return (seq);
 }

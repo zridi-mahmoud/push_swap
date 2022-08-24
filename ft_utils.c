@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 12:11:03 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/23 21:20:46 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/24 23:08:12 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,11 @@ int	init_stacks(t_stacks *stacks, int size, int *int_tab)
 void	push_lis_helper(t_stacks *stacks, int *seq)
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	while (stacks->size_a > stacks->size_seq)
+	j = 0;
+	while (stacks->size_a > stacks->size_seq && i < stacks->size_seq)
 	{
 		if (seq[i] == stacks->a[0])
 		{
@@ -75,7 +77,10 @@ void	push_lis_helper(t_stacks *stacks, int *seq)
 		}
 		else
 			pb(stacks);
+		j++;
 	}
+	while (stacks->size_seq < stacks->size_a)
+		pb(stacks);
 }
 
 int	push_lis(t_stacks *stacks)
@@ -90,7 +95,7 @@ int	push_lis(t_stacks *stacks)
 		printf("Error\n");
 		return (0);
 	}
-	seq = lis(stacks, dp);
+	seq = lis(stacks, dp, -1e9);
 	if (!seq)
 	{
 		free(dp);

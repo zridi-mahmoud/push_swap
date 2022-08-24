@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 16:39:40 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/23 18:15:50 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/24 18:41:37 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	sa(t_stacks *stacks, int type, int print)
 	if (type)
 	{
 		if (print)
-			printf("sa\n");
+			save_op(stacks, "sa ");
 		tmp = stacks->a[0];
 		stacks->a[0] = stacks->a[1];
 		stacks->a[1] = tmp;
@@ -35,16 +35,17 @@ void	sa(t_stacks *stacks, int type, int print)
 	else
 	{
 		if (print)
-			printf("sb\n");
+			save_op(stacks, "sb ");
 		tmp = stacks->b[0];
 		stacks->b[0] = stacks->b[1];
 		stacks->b[1] = tmp;
 	}
 }
 
-void	ss(t_stacks *stacks)
+void	ss(t_stacks *stacks, int print)
 {
-	printf("ss\n");
+	if (print)
+		save_op(stacks, "ss ");
 	sa(stacks, 1, 0);
 	sa(stacks, 0, 0);
 }

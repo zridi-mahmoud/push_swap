@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 20:07:59 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/23 21:32:22 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/24 20:49:46 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ void	free_stack(t_stacks *stacks)
 	free(stacks->b);
 	free(stacks->sorted_a);
 	free(stacks->operations);
-	free(stacks);	
+	free(stacks);
 }

@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:20:15 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/23 21:23:32 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/24 22:47:24 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ char	**ft_split(char const *s, char c);
 char	*join_args(char **args, int i);
 size_t	ft_strlen(const char *s);
 long	ft_atoi(const char *str);
-int		*lis(t_stacks *stacks, int *dp);
+int		*lis(t_stacks *stacks, int *dp, int last);
 void	sa(t_stacks *stacks, int type, int print);
-void	ss(t_stacks *stacks);
+void	ss(t_stacks *stacks, int print);
 void	pa(t_stacks *stacks);
 void	pb(t_stacks *stacks);
 void	ra(t_stacks *stacks, int type, int print);
@@ -76,5 +76,10 @@ char	*ft_strdup(const char *s1);
 char	*return_line_helper(char **st_line, char *copy, char *line);
 char	*ft_next_line_helper(int int_var, char **line, char *copy, int fd);
 int		*ft_str_to_int(char **str_tab);
+int		get_inp(char **argv, int **int_tab);
+int		len(char *s);
+void	sort_five(t_stacks *stacks);
+void	sort_three(t_stacks *stacks);
+void	ft_putstr(char *s);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:49:46 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/23 17:06:34 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/24 21:15:43 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ long	get_pos(char *str)
 		if (i > 9 || !(str[i] <= '9' && str[i] >= '0'))
 		{
 			result = 21474836490;
-			break ;			
+			break ;
 		}
 		else
 		{
@@ -31,6 +31,8 @@ long	get_pos(char *str)
 			i++;
 		}
 	}
+	if (i == 0)
+		return (21474836490);
 	return (result);
 }
 

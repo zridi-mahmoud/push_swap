@@ -6,7 +6,7 @@
 /*   By: mzridi <mzridi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 19:28:08 by mzridi            #+#    #+#             */
-/*   Updated: 2022/08/23 19:35:55 by mzridi           ###   ########.fr       */
+/*   Updated: 2022/08/24 22:43:03 by mzridi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	*ft_str_to_int(char **str_tab)
 
 	i = 0;
 	n = ft_tab_len(str_tab);
-	int_tab = (int *)malloc(sizeof(int *) * (n + 1));
+	int_tab = (int *)malloc(sizeof(int *) * n);
 	if (!int_tab)
 		return (0);
 	while (str_tab[i])
@@ -29,7 +29,6 @@ int	*ft_str_to_int(char **str_tab)
 		tmp = ft_atoi(str_tab[i]);
 		if (tmp > 2147483647 || tmp < -2147483648)
 		{
-			printf("Error\n");
 			free(int_tab);
 			return (0);
 		}
